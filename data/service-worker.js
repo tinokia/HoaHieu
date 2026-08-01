@@ -1,4 +1,4 @@
-const CACHE_NAME = "kpc-cache-v1";
+const CACHE_NAME = "kpc-cache-v2";
 
 const FILES_TO_CACHE = [
   "/",
