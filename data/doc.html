@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Đọc nội dung</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.doc{
+    max-width:900px;
+    margin:30px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.doc h1{
+    text-align:center;
+    color:#7b1e1e;
+    margin-bottom:20px;
+}
+
+.noidung{
+    white-space:pre-wrap;
+    font-size:20px;
+    line-height:1.1;   /* giảm khoảng cách giữa các dòng */
+    text-align:left;   /* nếu muốn căn trái */
+    margin-top:5px;   /* giảm khoảng cách với trình phát */
+}
+
+.back{
+    margin-top:5px;
+}
+
+/* ===========================
+   TRÌNH PHÁT ÂM THANH
+=========================== */
+
+#audioBox{
+
+display:none;
+
+background:#fffdf6;
+
+border:2px solid #d8b05f;
+
+border-radius:12px;
+
+padding:18px;
+
+margin-bottom:20px;
+
+}
+
+#playBtn{
+
+width:100%;
+
+font-size:18px;
+
+margin-bottom:15px;
+
+}
+
+#progress{
+
+width:100%;
+
+cursor:pointer;
+
+}
+
+.time{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:8px;
+
+font-size:15px;
+
+color:#666;
+
+}
+
+/* ===========================
+   ĐÔI LIỄN
+=========================== */
+
+.han{
+
+display:flex;
+
+justify-content:space-evenly;
+
+gap:30px;
+
+margin-top:20px;
+
+}
+
+.hanCot{
+
+text-align:center;
+
+}
+
+.sohan{
+
+font-weight:bold;
+
+color:#7b1e1e;
+
+margin-bottom:10px;
+
+}
+
+.cotHan{
+
+width:120px;
+
+min-height:320px;
+
+background:#fff8e6;
+
+border:2px solid #d8b05f;
+
+border-radius:12px;
+
+padding:20px 10px;
+
+writing-mode:vertical-rl;
+
+text-orientation:upright;
+
+font-size:34px;
+
+letter-spacing:6px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+margin:auto;
+
+}
+
+.giaithich{
+
+font-size:20px;
+
+line-height:2;
+
+text-align:justify;
+
+}
+.hoa-hieu{
+    text-align:center;
+    margin:25px 0 20px;
+}
+
+.hoa-hieu img{
+    width:100%;
+    max-width:420px;
+    height:65px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<h1>📚 THƠ - DANH NGÔN - KINH PHÁP CÚ - ĐÔI LIỄN</h1>
+
+<div id="dongHo" class="dongho"></div>
+
+</div>
+
+</header>
+
+<div class="doc">
+
+<h1 id="tieude"></h1>
+
+<div id="audioBox">
+
+<audio id="audio"></audio>
+
+<button
+id="playBtn"
+class="button"
+onclick="playAudio()">
+
+▶ Phát
+
+</button>
+
+<input
+type="range"
+id="progress"
+value="0"
+min="0"
+max="100"
+oninput="keoThanh()">
+
+<div class="time">
+
+<span id="timeNow">00:00</span>
+
+<span id="timeEnd">00:00</span>
+
+</div>
+
+</div>
+
+<div id="noidung"></div>
+
+<div class="back">
+
+<button class="button" onclick="history.back()">
+⬅ Quay lại
+
+</button>
+
+</div>
+
+</div>
+
+<script src="tho.js"></script>
+<script src="danhngon.js"></script>
+<script src="kinhphapcu.js"></script>
+<script src="lien.js"></script>
+<script>
+const loai = localStorage.getItem("loai");
+const id = Number(localStorage.getItem("id"));
+
+let bai = null;
+
+//==========================
+// TÌM DỮ LIỆU
+//==========================
+
+if(loai==="tho"){
+    bai=tho.find(x=>x.id===id);
+}
+
+if(loai==="danhngon"){
+    bai=danhngon.find(x=>x.id===id);
+}
+
+if(loai==="kinhphapcu"){
+    bai=kinhphapcu.find(x=>x.id===id);
+}
+
+if(loai==="lien"){
+    bai=lien.find(x=>x.id===id);
+}
+
+//==========================
+// KHÔNG TÌM THẤY
+//==========================
+
+if(!bai){
+
+    document.getElementById("tieude").innerHTML="Không tìm thấy dữ liệu.";
+
+}else{
+
+    document.getElementById("tieude").innerHTML=bai.tieude;
+
+    //==========================
+    // THƠ - DANH NGÔN
+    //==========================
+
+    if(loai==="tho" || loai==="danhngon"){
+
+        document.getElementById("noidung").innerHTML=`
+        <div class="noidung">
+${bai.noidung}
+        </div>`;
+
+    }
+
+    //==========================
+    // KINH PHÁP CÚ
+    //==========================
+
+    if(loai==="kinhphapcu"){
+
+        document.getElementById("audioBox").style.display="block";
+
+        const audio=document.getElementById("audio");
+
+        audio.src=bai.audio;
+
+        audio.onloadedmetadata=function(){
+
+            document.getElementById("timeEnd").innerHTML=
+            format(audio.duration);
+
+        };
+
+        audio.ontimeupdate=function(){
+
+            document.getElementById("progress").value=
+            audio.currentTime/audio.duration*100;
+
+            document.getElementById("timeNow").innerHTML=
+            format(audio.currentTime);
+
+        };
+
+        document.getElementById("noidung").innerHTML=`
+<div class="noidung">
+${bai.noidung}
+        </div>
+<div class="hoa-hieu">
+    <img src="HoaHieu.png" alt="Hoa Hiếu">
+</div>`;
+
+    }
+//==========================
+    // ĐÔI LIỄN
+    //==========================
+
+    if(loai==="lien"){
+
+        document.getElementById("noidung").innerHTML=`
+
+<div class="card-lien">
+
+<div class="lien-box">
+
+<div class="tieude">🌸 VẾ TRÁI</div>
+
+<div class="noidung-lien">
+${bai.vietTrai}
+</div>
+
+</div>
+
+<div class="lien-box">
+
+<div class="tieude">🌸 VẾ PHẢI</div>
+
+<div class="noidung-lien">
+${bai.vietPhai}
+</div>
+
+</div>
+
+<div class="lien-box">
+
+<div class="tieude">☯ CHỮ HÁN</div>
+
+<div class="han">
+
+<div class="hanCot">
+
+<div class="sohan">
+Vế trái
+</div>
+
+<div class="cotHan">
+${bai.hanTrai}
+</div>
+
+</div>
+
+<div class="hanCot">
+
+<div class="sohan">
+Vế phải
+</div>
+
+<div class="cotHan">
+${bai.hanPhai}
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="lien-box">
+
+<div class="tieude">
+💡 GIẢI THÍCH
+</div>
+
+<div class="giaithich">
+
+${bai.ynghia}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+}
+
+//==========================
+// TRÌNH PHÁT ÂM THANH
+//==========================
+
+function playAudio(){
+
+    const audio=document.getElementById("audio");
+
+    const btn=document.getElementById("playBtn");
+
+    if(audio.paused){
+
+        audio.play();
+
+        btn.innerHTML="⏸ Tạm dừng";
+
+    }else{
+
+        audio.pause();
+
+        btn.innerHTML="▶ Phát";
+
+    }
+
+}
+
+function keoThanh(){
+
+    const audio=document.getElementById("audio");
+
+    const progress=document.getElementById("progress");
+
+    if(audio.duration){
+
+        audio.currentTime=
+        progress.value/100*audio.duration;
+
+    }
+
+}
+
+function format(t){
+
+    if(isNaN(t)) return "00:00";
+
+    let p=Math.floor(t/60);
+
+    let s=Math.floor(t%60);
+
+    if(p<10) p="0"+p;
+
+    if(s<10) s="0"+s;
+
+    return p+":"+s;
+
+}
+
+document.getElementById("audio").onended=function(){
+
+    document.getElementById("playBtn").innerHTML="▶ Phát";
+
+};
+
+window.onbeforeunload=function(){
+
+    const audio=document.getElementById("audio");
+
+    audio.pause();
+
+    audio.currentTime=0;
+
+};
+
+</script>
+<script src="clock.js"></script>
+</body>
+</html>
