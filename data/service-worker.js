@@ -2,7 +2,7 @@ const CACHE_NAME = "kpc-cache-v1";
 
 const FILES_TO_CACHE = [
   "/",
-  "doc.html",
+  "data/doc.html",
   "data/style.css",
   "data/script.js",
   "data/kinhphapcu.js",
