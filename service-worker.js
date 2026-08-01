@@ -10,9 +10,7 @@ const FILES = [
   "/data/clock.js",
 
   "/data/kinhphapcu.js",
-  "/data/tho.js",
-  "/data/danhngon.js",
-  "/data/lien.js",
+  
 
   "/data/icon-192.png",
   "/data/icon-512.png"
