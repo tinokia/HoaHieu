@@ -2,13 +2,13 @@ const CACHE_NAME = "kpc-cache-v2";
 
 const FILES_TO_CACHE = [
   "/",
-  "data/doc.html",
-  "data/style.css",
-  "data/script.js",
-  "data/kinhphapcu.js",
-  "data/clock.js",
-  "data/HH192.png",
-  "data/HH512.png"
+  "doc.html",
+  "style.css",
+  "script.js",
+  "kinhphapcu.js",
+  "clock.js",
+  "HH192.png",
+  "HH512.png"
 ];
 
 // Cài đặt
