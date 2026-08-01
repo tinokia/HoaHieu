@@ -13,7 +13,7 @@ const FILES = [
   
 
   "/data/icon-192.png",
-  "/data/icon-512.png"
+  "/data/icon-512.png",
 ];
 
 // install
