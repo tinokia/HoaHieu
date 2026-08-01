@@ -22,7 +22,8 @@ self.addEventListener("install", e => {
 // Lấy dữ liệu offline
 self.addEventListener("fetch", e => {
   e.respondWith(
-    caches.match(e.request)
-      .then(res => res || fetch(e.request))
+    caches.match(e.request).then(response => {
+      return response || fetch(e.request);
+    })
   );
 });
