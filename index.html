@@ -232,6 +232,10 @@ document.getElementById("tongKinh").innerHTML=
 
 </script>
 <script src="data/clock.js"></script>
-
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/HoaHieu/service-worker.js')
+}
+</script>
 </body>
 </html>
