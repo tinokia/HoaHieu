@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinh Pháp Cú</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f8f4e9 0%, #e9dfc8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #6b4226;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #8b6b4f;
+            font-size: 16px;
+        }
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chapter-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px 20px;
+            border-left: 4px solid #b8860b;
+            box-shadow: 0 2px 8px rgba(139, 107, 79, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .chapter-item:hover {
+            transform: translateX(5px);
+            background: #fff9ea;
+            box-shadow: 0 4px 12px rgba(139, 107, 79, 0.15);
+        }
+        .chapter-name {
+            color: #5a381f;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        .chapter-count {
+            color: #8b7355;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #8b7355;
+            font-size: 14px;
+        }
+    </style>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8b5a2b">
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(reg => console.log('✅ Service Worker đăng ký thành công!', reg))
+      .catch(err => console.log('❌ Lỗi Service Worker:', err));
+  });
+}
+</script>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📜 Kinh Pháp Cú</h1>
+            <p class="subtitle">Đạo Lý Thật Từ Bi Đức Phật</p>
+        </header>
+
+        <div class="chapter-list">
+            <div class="chapter-item" onclick="openChapter(1)">
+                <div class="chapter-name">Phẩm Song Yếu</div>
+                <div class="chapter-count">Bài 1 -> 20</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(2)">
+                <div class="chapter-name">Phẩm Không Phóng Dật</div>
+                <div class="chapter-count">Bài 21 -> 32</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(3)">
+                <div class="chapter-name">Phẩm Tâm</div>
+                <div class="chapter-count">Bài 33 -> 43</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(4)">
+                <div class="chapter-name">Phẩm Hoa</div>
+                <div class="chapter-count">Bài 44 -> 59</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(5)">
+                <div class="chapter-name">Phẩm Ngu</div>
+                <div class="chapter-count">Bài 60 -> 75</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(6)">
+                <div class="chapter-name">Phẩm Hiền Trí</div>
+                <div class="chapter-count">Bài 76 -> 89</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(7)">
+                <div class="chapter-name">Phẩm A La Hán</div>
+                <div class="chapter-count">Bài 90 -> 99</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(8)">
+                <div class="chapter-name">Phẩm Ngàn</div>
+                <div class="chapter-count">Bài 100 -> 115</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(9)">
+                <div class="chapter-name">Phẩm Ác</div>
+                <div class="chapter-count">Bài 116 -> 128</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(10)">
+                <div class="chapter-name">Phẩm Hình Phạt</div>
+                <div class="chapter-count">Bài 129 -> 144</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(11)">
+                <div class="chapter-name">Phẩm Già</div>
+                <div class="chapter-count">Bài 146 -> 156</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(12)">
+                <div class="chapter-name">Phẩm Tự Ngã</div>
+                <div class="chapter-count">Bài 157 -> 166</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(13)">
+                <div class="chapter-name">Phẩm Thế Gian</div>
+                <div class="chapter-count">Bài 167 -> 178</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(14)">
+                <div class="chapter-name">Phẩm Phật Đà</div>
+                <div class="chapter-count">Bài 179 -> 196</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(15)">
+                <div class="chapter-name">Phẩm An Lạc</div>
+                <div class="chapter-count">Bài 197 -> 208</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(16)">
+                <div class="chapter-name">Phẩm Hỷ Ái</div>
+                <div class="chapter-count">Bài 209 -> 220</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(17)">
+                <div class="chapter-name">Phẩm Phẫn Nộ</div>
+                <div class="chapter-count">Bài 221 -> 234</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(18)">
+                <div class="chapter-name">Phẩm Cấu Uế</div>
+                <div class="chapter-count">Bài 235 -> 255</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(19)">
+                <div class="chapter-name">Phẩm Pháp Trụ</div>
+                <div class="chapter-count">Bài 256 -> 272</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(20)">
+                <div class="chapter-name">Phẩm Đạo</div>
+                <div class="chapter-count">Bài 273 -> 289</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(21)">
+                <div class="chapter-name">Phẩm Tạp Lục</div>
+                <div class="chapter-count">Bài 290 -> 305</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(22)">
+                <div class="chapter-name">Phẩm Địa Ngục</div>
+                <div class="chapter-count">Bài 306 -> 319</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(23)">
+                <div class="chapter-name">Phẩm Voi</div>
+                <div class="chapter-count">Bài 320 -> 333</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(24)">
+                <div class="chapter-name">Phẩm Tham Ái</div>
+                <div class="chapter-count">Bài 334 -> 359</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(25)">
+                <div class="chapter-name">Phẩm Tỳ Kheo</div>
+                <div class="chapter-count">Bài 360 -> 382</div>
+            </div>
+            <div class="chapter-item" onclick="openChapter(26)">
+                <div class="chapter-name">Phẩm Bà La Môn</div>
+                <div class="chapter-count">Bài 383 -> 423</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Kinh Pháp Cú - Bản dịch tham khảo</p>
+        </footer>
+    </div>
+
+    <script>
+        function openChapter(id) {
+            window.location.href = `KPC/pham${id}.html`;
+        }
+    </script>
+</body>
+</html>

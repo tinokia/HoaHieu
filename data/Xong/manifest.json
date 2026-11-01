@@ -1,0 +1,22 @@
+{
+  "name": "Kinh Pháp Cú",
+  "short_name": "Pháp Cú",
+  "description": "Ứng dụng đọc Kinh Pháp Cú có âm thanh",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8f4e9",
+  "theme_color": "#8b5a2b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "KPC/HH192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "KPC/HoaHieu.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
