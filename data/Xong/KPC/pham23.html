@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phẩm Voi - Kinh Pháp Cú</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif;}
+        body{background:linear-gradient(135deg,#f8f4e9 0%,#e9dfc8 100%);min-height:100vh;padding:20px;}
+        .container{max-width:650px;margin:0 auto;}
+        .back-btn{display:inline-flex;align-items:center;color:red;text-decoration:none;font-size:16px;margin-bottom:20px;padding:8px 12px;background:#fff;border-radius:8px;transition:background .2s;}
+        .back-btn:hover{background:#fff2dc;}
+        header{text-align:center;padding:20px;margin-bottom:30px;border-bottom:2px solid #d9c7a7;}
+        h1{color:#6b4226;font-size:24px;margin-bottom:8px;}
+        .subtitle{color:#8b6b4f;font-size:15px;}
+        .poem-item{background:#fff;border-radius:12px;padding:22px;margin-bottom:16px;box-shadow:0 2px 8px rgba(139,107,79,.1);position:relative;}
+        .poem-number{color:#b8860b;font-weight:bold;font-size:15px;margin-bottom:12px;}
+        .poem-content{color:#4a3520;font-size:17px;line-height:1.8;margin-bottom:40px;}
+        .audio-btn{position:absolute;bottom:15px;right:15px;width:36px;height:36px;background:#f0e6d2;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;}
+        .audio-btn:hover{background:#e2d4b8;transform:scale(1.05);}
+        .audio-btn svg{width:18px;height:18px;color:#8b5a2b;}
+        audio{display:none;}
+        footer{text-align:center;margin-top:40px;padding:20px;color:#8b7355;font-size:14px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <a href="../index.html" class="back-btn">Trang chủ</a>
+            <h1>Phẩm Voi</h1>
+            <p class="subtitle">Bài 320 -> 333</p>
+        </header>
+
+        <div class="poem-item">
+            <div class="poem-number">Bài 322</div>
+            <div class="poem-content">
+Tốt thay, con la thuần<br>
+Thuần chủng loài ngựa Xinh<br>
+Ðại tượng, voi có ngà<br>
+Tự điều mới tối thượng.
+            </div>
+            <button class="audio-btn" onclick="toggleAudio('audio1')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <audio id="audio1" src="mp3/322.m4a">
+        </div>
+
+        <!-- Lặp lại tương tự cho các bài khác nhớ đóng thẻ  nhé -->
+
+        <footer>
+            <p>Kinh Pháp Cú — Phẩm Voi</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentAudio = null;
+        function toggleAudio(id) {
+            const audio = document.getElementById(id);
+            const btn = audio.previousElementSibling;
+            
+            if (currentAudio && currentAudio !== audio) {
+                currentAudio.pause();
+                currentAudio.previousElementSibling.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+            }
+            
+            if (audio.paused) {
+                audio.play();
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+                currentAudio = audio;
+            } else {
+                audio.pause();
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+                currentAudio = null;
+            }
+        }
+    </script>
+</body>
+</html>
